@@ -15,7 +15,10 @@ navigator.mediaDevices.getUserMedia({
 
 button.addEventListener("click",()=>{
 
-    let count=5;
+    let count=3;
+    button.disabled=true;
+    button.innerHTML ="Get Ready.."
+
     timer.innerHTML = count;
     const countdown = setInterval(()=> {
         count--;
@@ -30,8 +33,11 @@ button.addEventListener("click",()=>{
 
     });
  function takePhoto(){
-    canvas.width = 200;
-    canvas.height=150;
+    button.disabled = false;
+    button.innerHTML="Take Photo"
+    
+    canvas.width = 150;
+    canvas.height=100;
 
     const context = canvas.getContext("2d");
 
