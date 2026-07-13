@@ -8,8 +8,15 @@
 <body>
     <h1>Snap Studio</h1>
     <p>Your web-based photobooth is starting up.</p>
-    <button>
-        Open Camera
+    <video id="camera" width="700" autoplay></video>
+
+    <button id="capture">
+        Capture Photo
     </button>
+
+    <canvas id="photo"></canvas>
+
+    <script src="/static/script.js"></script>
+
 </body>
 </html>
