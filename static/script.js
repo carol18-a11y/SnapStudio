@@ -1,3 +1,7 @@
+let photoCount = 0;
+const maxPhotos = 4;
+
+const gallery = document.getElementById("gallery");
 const video = document.getElementById("camera");
 const button =document.getElementById("capture");
 const canvas = document.getElementById("photo");
@@ -24,7 +28,7 @@ button.addEventListener("click",()=>{
         count--;
         timer.innerHTML = count;
 
-        if(count==0){
+        if(count===0){
             clearInterval(countdown);
             takePhoto();
             timer.innerHTML = "Photo Taken!";
@@ -33,9 +37,10 @@ button.addEventListener("click",()=>{
 
     });
  function takePhoto(){
-    button.disabled = false;
-    button.innerHTML="Take Photo"
-    
+    if(photoCount >= maxPhotos){
+        return;
+    }
+
     canvas.width = 150;
     canvas.height=100;
 
@@ -48,4 +53,18 @@ button.addEventListener("click",()=>{
         canvas.width,
         canvas.height
     );
+    const image=document.createElement("img");
+    image.src=canvas.toDataURL("image/png");
+    image.width=120;
+    gallery.appendChild(image);
+    photoCount++;
+    
+    if(photoCount ===maxPhotos){
+        button.disabled = true;
+        button.innerHTML = "Photos Complete!"
+    }
+    else{
+    button.disabled = false;
+    button.innerHTML="Take Photo";
+    }
 };
