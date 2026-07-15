@@ -1,0 +1,14 @@
+body{
+    font-family: Arial, sans-serif;
+}
+
+#gallery{
+    margin-top: 20px;
+}
+
+#gallery img{
+    margin: 10px;
+    border: 2px solid black;
+    border-radius: 8px;
+
+}
