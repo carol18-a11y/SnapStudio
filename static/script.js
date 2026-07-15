@@ -1,48 +1,70 @@
+// Variables
+
+
 let photoCount = 0;
 const maxPhotos = 4;
 
 const gallery = document.getElementById("gallery");
 const video = document.getElementById("camera");
-const button =document.getElementById("capture");
+const button = document.getElementById("capture");
 const canvas = document.getElementById("photo");
 const timer = document.getElementById("timer");
 
+
+// Camera Setup
+
 navigator.mediaDevices.getUserMedia({
-    video:true
+    video: true
 })
-.then(stream=>{
-    video.srcObject=stream;
+.then(stream => {
+    video.srcObject = stream;
 })
 .catch(error => {
     console.log("Camera error:", error);
 });
 
-button.addEventListener("click",()=>{
 
-    let count=3;
-    button.disabled=true;
-    button.innerHTML ="Get Ready.."
+// Capture Button
+button.addEventListener("click", () => {
+
+    let count = 3;
+
+    button.disabled = true;
+    button.innerHTML = "Get Ready...";
 
     timer.innerHTML = count;
-    const countdown = setInterval(()=> {
+
+    const countdown = setInterval(() => {
+
         count--;
         timer.innerHTML = count;
 
-        if(count===0){
-            clearInterval(countdown);
-            takePhoto();
-            timer.innerHTML = "Photo Taken!";
-        }
-    },1000);
+        if (count === 0) {
 
-    });
- function takePhoto(){
-    if(photoCount >= maxPhotos){
+            clearInterval(countdown);
+
+            takePhoto();
+
+            timer.innerHTML = "Photo Taken!";
+
+        }
+
+    }, 1000);
+
+});
+
+
+
+// Capture Photo Function
+
+function takePhoto() {
+
+    if (photoCount >= maxPhotos) {
         return;
     }
 
     canvas.width = 150;
-    canvas.height=100;
+    canvas.height = 100;
 
     const context = canvas.getContext("2d");
 
@@ -53,18 +75,28 @@ button.addEventListener("click",()=>{
         canvas.width,
         canvas.height
     );
-    const image=document.createElement("img");
-    image.src=canvas.toDataURL("image/png");
-    image.width=120;
+
+    const image = document.createElement("img");
+
+    image.src = canvas.toDataURL("image/png");
+
+    image.width = 120;
+
     gallery.appendChild(image);
+
     photoCount++;
-    
-    if(photoCount ===maxPhotos){
+
+    if (photoCount === maxPhotos) {
+
         button.disabled = true;
-        button.innerHTML = "Photos Complete!"
+        button.innerHTML = "Photos Complete!";
+
     }
-    else{
-    button.disabled = false;
-    button.innerHTML="Take Photo";
+    else {
+
+        button.disabled = false;
+        button.innerHTML = "Take Photo";
+
     }
-};
+
+}
