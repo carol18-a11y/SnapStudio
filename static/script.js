@@ -7,9 +7,10 @@ const maxPhotos = 4;
 const gallery = document.getElementById("gallery");
 const video = document.getElementById("camera");
 const button = document.getElementById("capture");
+const restartButton = document.getElementById("restart");
 const canvas = document.getElementById("photo");
 const timer = document.getElementById("timer");
-
+const progress = document.getElementById("progress");
 
 // Camera Setup
 
@@ -53,6 +54,12 @@ button.addEventListener("click", () => {
 
 });
 
+restartButton.addEventListener("click",() => {
+    restartSession();
+});
+
+
+
 
 
 // Capture Photo Function
@@ -86,6 +93,13 @@ function takePhoto() {
 
     photoCount++;
 
+    if(photoCount < maxPhotos){
+        progress.innerHTML = `Photo ${photoCount + 1} of ${maxPhotos}`
+    }
+    else{
+        progress.innerHTML = "Photos Complete!";
+    }
+
     if (photoCount === maxPhotos) {
 
         button.disabled = true;
@@ -99,4 +113,13 @@ function takePhoto() {
 
     }
 
+}
+
+function restartSession(){
+    photoCount =0;
+    gallery.innerHTML ="";
+    progress.innerHTML=`Photo 1 of ${maxPhotos}`;
+    timer.innnerHTML = "";
+    button.disabled=false;
+    button.innerHTML="Take Photo";
 }

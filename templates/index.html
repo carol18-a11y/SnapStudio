@@ -1,29 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SnapStudio</title>
 
-    <link rel="stylesheet" href="/static/style.css"></link>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
+
 <body>
-    <h1>Snap Studio</h1>
+
+    <h1>SnapStudio</h1>
     <p>Your web-based photobooth is starting up.</p>
-    <video id="camera" width="700" autoplay></video>
 
-    <br></br>
-    
-    <button id="capture">
-        Take Photo
-    </button>
+    <div class="container">
 
-    <h2 id="timer"></h2>
-    <h3>Your Photos:</h3>
-    <div id="gallery"></div>
+        <div class="camera-section">
+
+            <video id="camera" width="700" autoplay></video>
+
+            <h2 id="progress">
+                Photo 1 of 4
+            </h2>
+
+            <h2 id="timer"></h2>
+
+            <button id="capture">
+                Take Photo
+            </button>
+
+            <button id="restart">
+                Start Over
+            </button>
+
+        </div>
+
+        <div class="preview-section">
+
+            <h3>Your Photos</h3>
+
+            <div id="gallery"></div>
+
+        </div>
+
+    </div>
+
     <canvas id="photo" style="display:none;"></canvas>
 
     <script src="/static/script.js"></script>
 
 </body>
+
 </html>
