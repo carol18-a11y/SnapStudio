@@ -34,6 +34,12 @@ p {
 #camera {
     border-radius: 12px;
     border: 3px solid #333;
+    transform: scaleX(-1);
+}
+
+.camera-container{
+    position: relative;
+    display: inline-block;
 }
 
 
@@ -43,9 +49,16 @@ p {
 }
 
 #timer {
-    font-size: 40px;
-    color: crimson;
-    height: 50px;
+    font-size: 70px;
+    font-weight:bold;
+    color: white;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    text-shadow:0 0 15px black;
+    pointer-events:none;
+    opacity:0;
 }
 
 button {
@@ -104,4 +117,31 @@ button:disabled {
 
 #restart:hover{
     background-color: darkred;
+}
+
+#flash{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+}
+
+@keyframes pop{
+    0%{
+        transform:translate(-50%,-50%) scale(0.3);
+        opacity:0;
+    }
+    50%{
+        transform: translate(-50%,-50%) scale(1.3);
+        opacity:1; 
+    }
+    100%{
+        transform: tramslate(-50,-50) scale(1);
+        opacity:1;
+    }
 }
