@@ -1,125 +1,113 @@
 # SnapStudio
 
-SnapStudio is a modern web based photobooth application built with Flask, HTML, CSS, and JavaScript. It allows users to capture high quality photos directly from their webcam through an intuitive browser interface.
-
-This repository documents the development of SnapStudio from a simple camera application into a complete online photobooth with customizable layouts, filters, themes, and downloadable photo strips.
-
-Current Version: Level 1 – Core Photo Booth
+SnapStudio is a modern web-based photobooth application that recreates the experience of a real photobooth directly in the browser. Users can capture photos using their webcam, customize layouts, apply filters and effects, edit images, and download or share their creations.
 
 ## Features
 
-### Implemented
+### Camera
 
-Live webcam preview
+- Live webcam preview
+- 3-second animated countdown
+- Camera flash animation
+- Realistic shutter sound
+- Mirrored live preview
+- Mirrored photo capture
+- Four-photo capture session
+- Restart session
 
-3 second countdown before capture
+### Layouts
 
-Capture up to four photos per session
+- Classic Polaroid
+- Vertical photo strip
+- Horizontal photo strip
+- Custom frame colors
+- Date and time stamp
+- Custom captions
 
-Live photo gallery preview
+### Photo Editing
 
-Progress indicator showing the current photo number
+- Black & White
+- Vintage
+- Sepia
+- Retro
+- Brightness adjustment
+- Contrast adjustment
+- Saturation adjustment
+- Crop
+- Rotate
+- Flip
+- Stickers
+- Emojis
+- Custom text
 
-Responsive user interface
+### AI Features
 
-Browser based image capture using the Canvas API
+- AI background removal
+- AI background replacement
+- Portrait enhancement
 
-## Planned Features
+### Export & Sharing
 
-Restart session
+- Download as PNG
+- Download printable photo strip
+- QR code generation
+- Social media sharing
 
-Delete and retake photos
+### User Experience
 
-Camera flash animation
+- Responsive design
+- Dark mode
+- Smooth animations
+- Keyboard shortcuts
+- Mobile-friendly interface
 
-Shutter sound
+## Technologies
 
-Vertical and horizontal photo strips
-
-Polaroid mode
-
-Photo filters
-
-Themes and templates
-
-Stickers and text overlays
-
-Download printable templates
-
-Progressive Web App support
-
-AI powered background effects
-
-## Tech Stack
-
-| Technology | Purpose |
-|------------|---------|
-| Python | Backend |
-| Flask | Web Framework |
-| HTML5 | Page Structure |
-| CSS3 | Styling |
-| JavaScript (ES6+) | Client Side Logic |
-| MediaDevices API | Webcam Access |
-| Canvas API | Image Capture |
+- Python
+- Flask
+- HTML5
+- CSS3
+- JavaScript (ES6)
+- HTML5 Canvas API
+- MediaDevices API
+- QR Code Generation
+- AI Image Processing APIs
 
 ## Project Structure
 
-```text
+```
 SnapStudio/
 │
 ├── app.py
 ├── requirements.txt
 ├── README.md
 │
-├── static/
-│   ├── style.css
-│   ├── script.js
-│   └── captures/
-│
 ├── templates/
 │   └── index.html
+│
+├── static/
+│   ├── css/
+│   ├── js/
+│   ├── sounds/
+│   ├── images/
+│   ├── stickers/
+│   ├── frames/
+│   └── icons/
 │
 └── screenshots/
 ```
 
-## Development Roadmap
 
-Level 1 – Core Photo Booth ✔
+## Future Enhancements
 
-Level 2 – Camera Experience Improvements
+- User accounts
+- Cloud gallery
+- Event mode
+- Custom templates
+- GIF and Boomerang support
+- Video photobooth mode
+- Multi-language support
 
-Level 3 – Multiple Booth Modes
+## License
 
-Level 4 – Printable Photo Strip Generator
-
-Level 5 – Themes and Templates
-
-Level 6 – Filters and Decorations
-
-Level 7 – GIF Mode
-
-Level 8 – Cloud Gallery
-
-Level 9 – AI Features
-
-Level 10 – Progressive Web App
-
-## Screenshots
-
-Screenshots will be added as the project evolves.
-
-## Future Vision
-
-SnapStudio aims to become a complete browser based photobooth platform where users can:
-
-Capture memories with customizable layouts
-
-Create Polaroid style photos
-
-Generate vertical and horizontal photo strips
-
-Apply creative filters and themes
-
-Download printable keepsakes
-
-Share creations online
+This project is licensed under the MIT License.
