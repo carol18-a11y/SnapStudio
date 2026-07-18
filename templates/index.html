@@ -2,55 +2,138 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>SnapStudio</title>
 
     <link rel="stylesheet" href="/static/style.css">
+
 </head>
 
 <body>
 
     <h1>SnapStudio</h1>
-    <p>Your web-based photobooth is starting up.</p>
+    <p>Create your own digital photobooth memories.</p>
 
-    <div class="container">
+    <div id="layout-page">
 
-        <div class="camera-section">
-            <div class="camera-container">
+        <h2>Choose Your Layout</h2>
 
-                <video id="camera" width="700" autoplay></video>
-                <div id= "flash"></div>
-                <h2 id="timer"></h2>
+        <div class="layout-grid">
+
+            <div class="layout-card" data-layout="polaroid">
+                <h3>Polaroid</h3>
+                <p>1 Photo</p>
             </div>
 
-            <h2 id="progress">
-                Photo 1 of 4
-            </h2>
+            <div class="layout-card" data-layout="grid">
+                <h3>Photo Grid</h3>
+                <p>4 Photos (2 × 2)</p>
+            </div>
 
-            
+            <div class="layout-card" data-layout="vertical">
+                <h3>Vertical Strip</h3>
+                <p>4 or 6 Photos</p>
+            </div>
 
-            <button id="capture">
-                Take Photo
-            </button>
-
-            <button id="restart">
-                Start Over
-            </button>
+            <div class="layout-card" data-layout="horizontal">
+                <h3>Horizontal Strip</h3>
+                <p>4 or 6 Photos</p>
+            </div>
 
         </div>
 
-        <div class="preview-section">
 
-            <h3>Your Photos</h3>
+        <div id="photo-options" style="display:none;">
 
-            <div id="gallery"></div>
+            <h3>Choose Number of Photos</h3>
+
+            <button class="photo-count" data-count="4">4 Photos</button>
+
+            <button class="photo-count" data-count="6">6 Photos</button>
+
+        </div>
+
+        <button id="continueButton">
+
+            Continue
+
+        </button>
+
+    </div>
+
+    <div id="camera-page" style="display:none;">
+
+        <div class="container">
+
+            <div class="camera-section">
+
+                <div class="camera-container">
+
+                    <video
+                        id="camera"
+                        width="700"
+                        autoplay
+                        playsinline>
+                    </video>
+
+                    <div id="flash"></div>
+
+                    <h2 id="timer"></h2>
+
+                </div>
+
+                <h2 id="progress">
+                    Photo 1
+                </h2>
+
+                <button id="capture">
+                    Take Photo
+                </button>
+
+                <button id="restart">
+                    Start Over
+                </button>
+
+            </div>
+
+            <div class="preview-section">
+
+                <h3>Your Photos</h3>
+
+                <div id="gallery"></div>
+
+            </div>
 
         </div>
 
     </div>
 
-    <canvas id="photo" style="display:none;"></canvas>
+    <div id="result-page" style="display:none;">
+
+        <h2>Your Photo Booth Print</h2>
+
+        <canvas id="finalCanvas"></canvas>
+
+        <br><br>
+
+        <button id="downloadButton">
+            Download
+        </button>
+
+        <button id="newSession">
+            Create Another
+        </button>
+
+    </div>
+
+    <canvas
+        id="photo"
+        style="display:none;">
+    </canvas>
+
 
     <script src="/static/script.js"></script>
 
