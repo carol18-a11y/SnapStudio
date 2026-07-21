@@ -4,38 +4,48 @@ let maxPhotos = 4;
 
 let selectedLayout = "";
 let capturedPhotos = [];
+let currentFilter = "normal";
+const intensitySlider =
+document.getElementById("intensitySlider");
 
+const intensityValue =
+document.getElementById("intensityValue");
+
+let filterIntensity = 100;
+
+const filterButtons = document.querySelectorAll(".filter");
 const layoutPage = document.getElementById("layout-page");
 const cameraPage = document.getElementById("camera-page");
-const resultPage = document.getElementById("result-page");
-
+const resultPage = document.getElementById("result-page")
 const layoutCards = document.querySelectorAll(".layout-card");
 const continueButton = document.getElementById("continueButton");
-
 const photoOptions = document.getElementById("photo-options");
 const photoButtons = document.querySelectorAll(".photo-count");
-
 const video = document.getElementById("camera");
 const captureButton = document.getElementById("capture");
 const restartButton = document.getElementById("restart");
-
 const gallery = document.getElementById("gallery");
-
 const canvas = document.getElementById("photo");
 const context = canvas.getContext("2d");
-
 const finalCanvas = document.getElementById("finalCanvas");
 const finalContext = finalCanvas.getContext("2d");
-
 const progress = document.getElementById("progress");
 const timer = document.getElementById("timer");
-
 const flash = document.getElementById("flash");
-
 const downloadButton = document.getElementById("downloadButton");
 const newSessionButton = document.getElementById("newSession");
-
 const shutterSound = new Audio("/static/sounds/shutter.mp3");
+
+intensitySlider.addEventListener("input",()=>{
+
+    filterIntensity = intensitySlider.value;
+
+    intensityValue.innerHTML =
+    filterIntensity + "%";
+
+    applyPreviewFilter();
+
+});
 
 
 navigator.mediaDevices.getUserMedia({
@@ -113,6 +123,23 @@ continueButton.addEventListener("click",()=>{
         return;
 
     }
+        filterButtons.forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            filterButtons.forEach(btn => {
+                btn.classList.remove("active");
+            });
+
+            button.classList.add("active");
+
+            currentFilter = button.dataset.filter;
+
+            applyPreviewFilter();
+
+        });
+
+    });
 
     layoutPage.style.display="none";
 
@@ -175,7 +202,10 @@ function takePhoto(){
 
     context.save();
 
+    context.filter = getCanvasFilter();
+
     context.translate(canvas.width,0);
+
     context.scale(-1,1);
 
     context.drawImage(
@@ -190,6 +220,9 @@ function takePhoto(){
 
     );
 
+    context.restore();
+
+    context.filter = "none";
     context.restore();
 
     const imageData = canvas.toDataURL("image/png");
@@ -516,3 +549,82 @@ downloadButton.addEventListener("click",()=>{
     link.click();
 
 });
+
+function applyPreviewFilter(){
+
+    switch(currentFilter){
+
+        case "normal":
+            video.style.filter = "none";
+            break;
+
+        case "bw":
+            video.style.filter = `grayscale(${filterIntensity}%)`;
+            break;
+
+        case "sepia":
+            video.style.filter = `sepia(${filterIntensity}%)`;
+            break;
+
+        case "vintage":
+            video.style.filter =
+                `sepia(${filterIntensity * 0.5}%)
+                contrast(90%)
+                brightness(110%)`;
+            break;
+
+        case "cool":
+            video.style.filter =
+                `hue-rotate(${filterIntensity * 1.8}deg)`;
+            break;
+
+        case "warm":
+            video.style.filter =
+                `sepia(${filterIntensity * 0.3}%)
+                saturate(150%)`;
+            break;
+
+        case "retro":
+           video.style.filter =
+                `contrast(120%)
+                sepia(${filterIntensity * 0.4}%)
+                saturate(130%)`;
+            break;
+
+    }
+
+}
+
+function getCanvasFilter(){
+
+    switch(currentFilter){
+
+        case "bw":
+            return `grayscale(${filterIntensity}%)`;
+
+        case "sepia":
+            return `sepia(${filterIntensity}%)`;
+
+        case "vintage":
+            return `sepia(${filterIntensity * 0.5}%)
+                    contrast(90%)
+                    brightness(110%)`;
+
+        case "cool":
+            return `hue-rotate(${filterIntensity * 1.8}deg)`;
+
+        case "warm":
+            return `sepia(${filterIntensity * 0.3}%)
+                    saturate(150%)`;
+
+        case "retro":
+            return `contrast(120%)
+                    sepia(${filterIntensity * 0.4}%)
+                    saturate(130%)`;
+
+        default:
+            return "none";
+
+    }
+
+}
