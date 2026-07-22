@@ -343,11 +343,11 @@ function generateLayout(){
 
 function generatePolaroid(){
 
-    finalCanvas.width = 420;
+    finalCanvas.width = 450;
     finalCanvas.height = 560;
 
     finalContext.fillStyle = "white";
-    finalContext.fillRect(0,0,420,560);
+    finalContext.fillRect(0,0,450,560);
 
     const img = new Image();
 
@@ -355,7 +355,34 @@ function generatePolaroid(){
 
     img.onload = ()=>{
 
-        finalContext.drawImage(img,35,35,350,380);
+        const frameX = 35;
+const frameY = 35;
+const frameSize = 350;
+
+const imgRatio = img.width / img.height;
+const frameRatio = 1; // square
+
+let sx, sy, sw, sh;
+
+if (imgRatio > frameRatio) {
+    // Image is wider than the frame → crop left & right
+    sh = img.height;
+    sw = sh * frameRatio;
+    sx = (img.width - sw) / 2;
+    sy = 0;
+} else {
+    // Image is taller than the frame → crop top & bottom
+    sw = img.width;
+    sh = sw / frameRatio;
+    sx = 0;
+    sy = (img.height - sh) / 2;
+}
+
+finalContext.drawImage(
+    img,
+    sx, sy, sw, sh,
+    frameX, frameY, frameSize, frameSize
+);
 
         finalContext.fillStyle="black";
         finalContext.font="26px Arial";
@@ -363,7 +390,7 @@ function generatePolaroid(){
 
         finalContext.fillText(
             "SnapStudio",
-            210,
+            225,
             500
         );
 
