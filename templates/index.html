@@ -35,24 +35,13 @@
 
             <div class="layout-card" data-layout="vertical">
                 <h3>Vertical Strip</h3>
-                <p>4 or 6 Photos</p>
+                <p>4 Photos</p>
             </div>
 
             <div class="layout-card" data-layout="horizontal">
                 <h3>Horizontal Strip</h3>
-                <p>4 or 6 Photos</p>
+                <p>4 Photos</p>
             </div>
-
-        </div>
-
-
-        <div id="photo-options" style="display:none;">
-
-            <h3>Choose Number of Photos</h3>
-
-            <button class="photo-count" data-count="4">4 Photos</button>
-
-            <button class="photo-count" data-count="6">6 Photos</button>
 
         </div>
 
@@ -67,6 +56,15 @@
     <div id="camera-page" style="display:none;">
 
         <div class="container">
+            <div class="controls">
+                 <button id="capture">
+                    Take Photo
+                </button>
+
+                <button id="restart">
+                    Start Over
+                </button>
+            </div>
 
             <div class="camera-section">
 
@@ -84,6 +82,8 @@
                     <h2 id="timer"></h2>
 
                 </div>
+
+
 
                 <div class="filter-bar">
 
@@ -103,10 +103,6 @@
                     Vintage
                 </button>
 
-                <button class="filter" data-filter="cool">
-                    Cool
-                </button>
-
                 <button class="filter" data-filter="warm">
                     Warm
                 </button>
@@ -116,6 +112,8 @@
                 </button>
 
             </div>
+
+
 
             <div class="slider-container">
 
@@ -140,17 +138,9 @@
 
             </div>
 
-                <h2 id="progress">
-                    Photo 1
-                </h2>
-
-                <button id="capture">
-                    Take Photo
-                </button>
-
-                <button id="restart">
-                    Start Over
-                </button>
+            <h2 id="progress">
+                Photo 1
+            </h2>
 
             </div>
 

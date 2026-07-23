@@ -343,10 +343,10 @@ function generateLayout(){
 
 function generatePolaroid(){
 
-    finalCanvas.width = 450;
-    finalCanvas.height = 560;
+    finalCanvas.width = 520;
+    finalCanvas.height = 590;
 
-    finalContext.fillStyle = "white";
+    finalContext.fillStyle = "#fcfbf7";
     finalContext.fillRect(0,0,450,560);
 
     const img = new Image();
@@ -355,44 +355,40 @@ function generatePolaroid(){
 
     img.onload = ()=>{
 
-        const frameX = 35;
-const frameY = 35;
-const frameSize = 350;
+        const frameX = 40;
+        const frameY = 40;
+        const frameSize = 440;
 
-const imgRatio = img.width / img.height;
-const frameRatio = 1; // square
+        const imgRatio = img.width / img.height;
+        const frameRatio = 1; // square
 
-let sx, sy, sw, sh;
+        let sx, sy, sw, sh;
 
-if (imgRatio > frameRatio) {
-    // Image is wider than the frame → crop left & right
-    sh = img.height;
-    sw = sh * frameRatio;
-    sx = (img.width - sw) / 2;
-    sy = 0;
-} else {
-    // Image is taller than the frame → crop top & bottom
-    sw = img.width;
-    sh = sw / frameRatio;
-    sx = 0;
-    sy = (img.height - sh) / 2;
-}
+        if (imgRatio > frameRatio) {
+            // Image is wider than the frame → crop left & right
+            sh = img.height;
+            sw = sh * frameRatio;
+            sx = (img.width - sw) / 2;
+            sy = 0;
+        } else {
+            // Image is taller than the frame → crop top & bottom
+            sw = img.width;
+            sh = sw / frameRatio;
+            sx = 0;
+            sy = (img.height - sh) / 2;
+        }
+        finalContext.save();
 
-finalContext.drawImage(
-    img,
-    sx, sy, sw, sh,
-    frameX, frameY, frameSize, frameSize
-);
+        finalContext.beginPath();
+        finalContext.roundRect(frameX, frameY, frameSize, frameSize, 12);
+        finalContext.clip();
 
-        finalContext.fillStyle="black";
-        finalContext.font="26px Arial";
-        finalContext.textAlign="center";
-
-        finalContext.fillText(
-            "SnapStudio",
-            225,
-            500
+        finalContext.drawImage(
+            img,
+            sx, sy, sw, sh,
+            frameX, frameY, frameSize, frameSize
         );
+        finalContext.restore();
 
     };
 
@@ -401,17 +397,17 @@ finalContext.drawImage(
 function generateGrid(){
 
     finalCanvas.width=650;
-    finalCanvas.height=650;
+    finalCanvas.height=640;
 
     finalContext.fillStyle="white";
     finalContext.fillRect(0,0,650,650);
 
     const positions=[
 
-        [30,30],
-        [335,30],
-        [30,335],
-        [335,335]
+        [20,20],
+        [325,20],
+        [20,325],
+        [325,325]
 
     ];
 
@@ -424,6 +420,17 @@ function generateGrid(){
         img.src=photo;
 
         img.onload=()=>{
+            finalContext.fillStyle = "white";
+
+            finalContext.fillRect(
+
+                positions[index][0] - 5,
+                positions[index][1] - 5,
+
+                300,
+                300
+
+            );
 
             finalContext.drawImage(
 
@@ -432,29 +439,14 @@ function generateGrid(){
                 positions[index][0],
                 positions[index][1],
 
-                280,
-                280
+                290,
+                290
 
             );
 
             loaded++;
 
             if(loaded===capturedPhotos.length){
-
-                finalContext.font="24px Arial";
-
-                finalContext.fillStyle="black";
-
-                finalContext.fillText(
-
-                    "SnapStudio",
-
-                    250,
-
-                    630
-
-                );
-
             }
 
         };
@@ -465,10 +457,10 @@ function generateGrid(){
 
 function generateVertical(){
 
-    const imageHeight=220;
+    const imageHeight=190;
 
     finalCanvas.width=260;
-    finalCanvas.height=maxPhotos*imageHeight+40;
+    finalCanvas.height=maxPhotos*imageHeight+55;
 
     finalContext.fillStyle="white";
 
@@ -518,10 +510,10 @@ function generateVertical(){
 
 function generateHorizontal(){
 
-    const imageWidth=220;
+    const imageWidth=195;
 
     finalCanvas.width=maxPhotos*imageWidth+40;
-    finalCanvas.height=260;
+    finalCanvas.height=280;
 
     finalContext.fillStyle="white";
 
@@ -555,7 +547,7 @@ function generateHorizontal(){
 
                 180,
 
-                220
+                240
 
             );
 
@@ -636,9 +628,6 @@ function getCanvasFilter(){
             return `sepia(${filterIntensity * 0.5}%)
                     contrast(90%)
                     brightness(110%)`;
-
-        case "cool":
-            return `hue-rotate(${filterIntensity * 1.8}deg)`;
 
         case "warm":
             return `sepia(${filterIntensity * 0.3}%)
